@@ -12,19 +12,22 @@
             transition: transform 0.2s, box-shadow 0.2s;
             border-radius: 15px;
         }
+
         .product-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
         }
+
         .product-img {
             height: 200px;
             object-fit: cover;
             border-radius: 12px;
         }
+
         .line-clamp-2 {
             display: -webkit-box;
             -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;  
+            -webkit-box-orient: vertical;
             overflow: hidden;
         }
     </style>
@@ -33,35 +36,33 @@
 <body class="bg-light p-md-5 p-3">
     <div class="container">
         <h1 class="text-center fw-bold text-dark mb-5">Danh sách sản phẩm</h1>
-        <button class="btn btn-success mb-3"><a href="{{ route('add') }}" class="text-white text-decoration-none">Add Product</a></button>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
-            @foreach($products as $product)
-                <div class="col">
-                    <div class="card h-100 border-0 shadow-sm p-3 product-card">
-                        <small class="text-muted font-monospace mb-2">#{{ $product['id'] }}</small>
-                        
-                        <img src="{{ asset(str_replace('public/', '', $product['image'])) }}" 
-                             class="card-img-top product-img" 
-                             alt="{{ $product['name'] }}">
-                        
-                        <div class="card-body px-0 pb-0">
-                            <h5 class="card-title fw-bold text-dark text-truncate">{{ $product['name'] }}</h5>
-                            <p class="card-text text-secondary small line-clamp-2">
-                                {{ $product['description'] }}
-                            </p>
-                        </div>
-
-                        <div class="mt-auto pt-3 d-flex justify-content-between align-items-center">
-                            <span class="text-danger fw-bold fs-5">
-                                {{ number_format($product['price'], 0, ',', '.') }}đ
-                            </span>
-                            <button class="btn btn-primary btn-sm px-3">
-                                Mua ngay
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
+        <button class="btn btn-success mb-3"><a href="{{ route('add') }}" class="text-white text-decoration-none">Add
+                Product</a></button>
+        <div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>ten sp</th>
+                        <th>anh</th>
+                        <th>gia</th>
+                        <th>mo ta</th>
+                        <th>hanh dong</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($products as $product)
+                        <tr>
+                            <td>{{ $product['id'] }}</td>
+                            <td>{{ $product['name'] }}</td>
+                            <td><img src="{{ $product['image'] }}" alt="{{ $product['name'] }}" class="img-fluid" style="max-height: 100px;"></td>
+                            <td>{{ $product['price'] }}</td>
+                            <td>{{ $product['description'] }}</td>
+                            <td><button><a href="{{ route('detail', ['id' => $product['id']]) }}" class="text-decoration-none">detail</a></button></td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 

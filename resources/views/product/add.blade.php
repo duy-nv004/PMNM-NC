@@ -17,7 +17,8 @@
                         <h4 class="mb-0">Thêm sản phẩm mới</h4>
                     </div>
                     <div class="card-body p-4">
-                        <form action="" method="POST">
+                        <form action="/products/store" method="post">
+                            @csrf
                             <div class="mb-3">
                                 <label class="form-label fw-bold">Tên sản phẩm</label>
                                 <input type="text" name="name" class="form-control" placeholder="Ví dụ: iPhone 15 Pro">

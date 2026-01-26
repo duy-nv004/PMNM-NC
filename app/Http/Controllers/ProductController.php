@@ -43,4 +43,48 @@ class ProductController extends Controller
         // Truyền mảng $products sang view 'product.index'
         return view('product.index', compact('products'));
     }
+    function getDetail(string $id = "123")
+    {
+        $products = [
+            [
+                'id' => 1,
+                'image' => 'images/1.jpg',
+                'name' => 'iPhone 15 Pro Max',
+                'price' => 29990000,
+                'description' => 'Chip A17 Pro, Camera 48MP'
+            ],
+            [
+                'id' => 2,
+                'image' => 'images/1.jpg',
+                'name' => 'Samsung Galaxy S24 Ultra',
+                'price' => 26500000,
+                'description' => 'Snapdragon 8 Gen 3, Bút S-Pen'
+            ],
+            [
+                'id' => 3,
+                'image' => 'images/1.jpg',
+                'name' => 'MacBook Air M3',
+                'price' => 32000000,
+                'description' => 'Màn hình Liquid Retina, RAM 16GB'
+            ],
+            [
+                'id' => 4,
+                'image' => 'images/1.jpg',
+                'name' => 'Sony WH-1000XM5',
+                'price' => 6500000,
+                'description' => 'Chống ồn chủ động đỉnh cao'
+            ]
+        ];
+        $products = array_filter($products, function ($product) use ($id) {
+            return $product['id'] == $id;
+        });
+        return view('product.detail', compact('products'));
+    }
+    function store(Request $request)
+    {
+        return response()->json([
+            'message' => 'Product stored successfully',
+            'data' => $request->all()
+        ]);
+    }
 }
