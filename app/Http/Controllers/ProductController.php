@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Middleware\CheckTimeAccess;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
-class ProductController extends Controller
+class ProductController extends Controller 
 {
+    // public static function middleware(){
+    //     return CheckTimeAccess::class;
+    // } nếu dùng thì phải implements HasMiddleware
     function index()
     {
         // Tự định nghĩa mảng dữ liệu giả

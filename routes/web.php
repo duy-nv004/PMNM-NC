@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Middleware\CheckTimeAccess;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\testController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -38,3 +40,11 @@ Route::fallback(function () {
     return view('errors.404error');
     // return "404 Not Found. The requested route does not exist.";
 });
+Route::resource('tests', testController::class);
+Route::post('session', function (Request $request) {
+    // $request->session()->put('key', 'value');
+    $name = session()->all();
+    return  response()->json($name);
+})->name('session');
+Route::get('age', [AuthController::class, 'showAgeForm'])->name('age');
+Route::post('age', [AuthController::class, 'checkAge'])->name('checkAge.post');
