@@ -14,7 +14,7 @@
     <form class="col-5" action="{{ route('register.post') }}" method="post">
         @csrf
         <div class="mb-3">
-            <label class="form-label fw-bold">name</label>
+            <label class="form-label fw-bold">user name</label>
             <input type="text" name="name" class="form-control">
         </div>
         <div class="mb-3">
@@ -24,6 +24,17 @@
         <div class="mb-3">
             <label class="form-label fw-bold">confirm pass</label>
             <input type="password" name="confirm-pass" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold">mssv</label>
+            <input type="text" name="mssv" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold">gioi tinh</label>
+            <select name="gender" class="form-select">
+                <option value="nam">nam</option>
+                <option value="nu">nu</option>
+            </select>
         </div>
         <div>
             <button type="submit" class="btn btn-primary">dang ki</button>

@@ -25,14 +25,17 @@ class AuthController extends Controller
         return view('register');
     }
     function register(Request $request){
-        if($request->input('pass') == "" || $request->input('confirm-pass') == "" || $request->input('name') == ""){
+        if($request->input('pass') == "" || $request->input('confirm-pass') == "" || $request->input('name') == "" || $request->input('gender') == "" || $request->input('mssv') == ""){
             return "Vui lòng điền đầy đủ thông tin!";
         }
         if($request->input('pass') != $request->input('confirm-pass')){
             return "Mật khẩu xác nhận không khớp!";
         }
-        if($request->input('pass') == $request->input('confirm-pass')){
-            return redirect('login');
+        if($request->input('name')=='duynv' && $request->input('gender') == 'nam' && $request->input('mssv') == '0003867' && ($request->input('pass') == $request->input('confirm-pass'))){
+            return 'dang ki thanh cong';
+        }
+        else{
+            return "dang ki that bai";
         }
     }
     function showAgeForm()

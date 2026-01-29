@@ -15,7 +15,7 @@ class CheckAge
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->is('age') || $request->is('login')) {
+        if ($request->is('age') || $request->is('login') || $request->is('register')) {
             return $next($request);
         }
         $user = session()->has('user');
