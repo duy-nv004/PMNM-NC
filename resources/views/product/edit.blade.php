@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Thêm sản phẩm mới</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -14,23 +13,24 @@
             <div class="col-md-6">
                 <div class="card shadow border-0">
                     <div class="card-header">
-                        <h4 class="mb-0">Thêm sản phẩm mới</h4>
+                        <h4 class="mb-0">sửa sản phẩm</h4>
                     </div>
                     <div class="card-body p-4">
-                        <form action="{{ route('products.store') }}" method="post">
+                        <form action="{{ route('products.update',  $product->id) }}" method="POST">
                             @csrf
+                            @method('PUT')
                             <div class="mb-3">
                                 <label class="form-label fw-bold">Tên sản phẩm</label>
-                                <input type="text" name="name" class="form-control" placeholder="Ví dụ: iPhone 15 Pro">
+                                <input type="text" name="name" class="form-control" value="{{ $product->name }}">
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label fw-bold">Giá sản phẩm (VNĐ)</label>
-                                <input type="number" name="price" class="form-control" placeholder="30000000">
+                                <input type="number" name="price" class="form-control" value="{{ $product->price }}">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-bold">Số lượng</label>
-                                <input type="number" name="quantity" class="form-control" placeholder="10">
+                                <input type="number" name="quantity" class="form-control" value="{{ $product->quantity }}">
                             </div>
 
                             <div class="d-grid gap-2 mt-4">

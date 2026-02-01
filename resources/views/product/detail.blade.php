@@ -16,24 +16,17 @@
             <tr>
                 <th>id</th>
                 <th>ten sp</th>
-                <th>anh</th>
                 <th>gia</th>
-                <th>mo ta</th>
-                <th>hanh dong</th>
+                <th>so luong</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($products as $product)
                 <tr>
-                    <td>{{ $product['id'] }}</td>
-                    <td>{{ $product['name'] }}</td>
-                    <td><img src="{{ $product['image'] }}" alt="{{ $product['name'] }}" class="img-fluid"
-                            style="max-height: 100px;"></td>
-                    <td>{{ $product['price'] }}</td>
-                    <td>{{ $product['description'] }}</td>
-                    <td><button>edit</button></td>
+                    <td>{{ $products['id'] }}</td>
+                    <td>{{ $products['name'] }}</td>
+                    <td>{{ $products['price'] }}</td>
+                    <td>{{ $products['quantity'] }}</td>
                 </tr>
-            @endforeach
         </tbody>
     </table>
 </body>

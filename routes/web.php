@@ -14,18 +14,17 @@ Route::get('/test', function () {
     return response()->json(['message' => 'This is a test route']);
 });
 
-Route::prefix('products')->group(function () {
-    Route::controller(ProductController::class)->group(function () {
-        Route::get('/add', function () {
-            return view('product.add');
-        })->name("add");
-        Route::get('/', 'index');
+// Route::prefix('products')->group(function () {
+//     Route::controller(ProductController::class)->group(function () {
+//         Route::get('/add', 'create')->name("add");
+//         Route::get('/', 'index');
 
-        Route::get('detail/{id?}', 'getDetail')->name('detail');
-        Route::post('store', 'store')->name('store');
+//         Route::get('detail/{id?}', 'show')->name('detail');
+//         Route::post('store', 'store')->name('store');
 
-    });
-});
+//     });
+// });
+Route::resource('products', ProductController::class);
 Route::get('login', [AuthController::class, 'showLoginForm'])->name("login");
 Route::post('login', [AuthController::class, 'login'])->name("login.post");
 Route::get('register', [AuthController::class, 'showRegisterForm'])->name("register");
