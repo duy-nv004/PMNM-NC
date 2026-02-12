@@ -47,3 +47,9 @@ Route::post('session', function (Request $request) {
 })->name('session');
 Route::get('age', [AuthController::class, 'showAgeForm'])->name('age');
 Route::post('age', [AuthController::class, 'checkAge'])->name('checkAge.post');
+
+Route::get('/admin', function () {
+    return view('layout.admin');
+});
+
+Route::resource('categories', App\Http\Controllers\CategoryController::class);

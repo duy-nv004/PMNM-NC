@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -10,33 +13,39 @@ class AuthController extends Controller
     {
         return view('login');
     }
-    function login(Request $request)
+    public function login(Request $request)
     {
-        if($request->input('name') == 'admin' && $request->input('pass') == 'password'){
-            $request->session()->put('user', $request->input('name'));
-            // dd(session('user'));
+        // Lấy dữ liệu từ 
+        $email = $request->input('email');
+        $password = $request->input('password');
+
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            $request->session()->regenerate();
             return redirect('products');
-        } else {
-            return "Đăng nhập thất bại!";
         }
+
+        dd('Đăng nhập thất bại. Vui lòng kiểm tra lại email và mật khẩu.');
     }
+
     function showRegisterForm()
     {
         return view('register');
     }
-    function register(Request $request){
-        if($request->input('pass') == "" || $request->input('confirm-pass') == "" || $request->input('name') == "" || $request->input('gender') == "" || $request->input('mssv') == ""){
-            return "Vui lòng điền đầy đủ thông tin!";
-        }
-        if($request->input('pass') != $request->input('confirm-pass')){
-            return "Mật khẩu xác nhận không khớp!";
-        }
-        if($request->input('name')=='duynv' && $request->input('gender') == 'nam' && $request->input('mssv') == '0003867' && ($request->input('pass') == $request->input('confirm-pass'))){
-            return 'dang ki thanh cong';
-        }
-        else{
-            return "dang ki that bai";
-        }
+    function register(Request $request)
+    {
+        // $request->validate([
+        //     'name' => 'required|string|max:255',
+        //     'email' => 'required|string|email|max:255|unique:users',
+        //     'password' => 'required|string|min:8|confirmed',
+        // ]);
+        $ure = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+        ]);
+        // return redirect('login');
+        return redirect()->route('login')->with('success', 'Đăng ký thành công, mời bạn đăng nhập!');
+
     }
     function showAgeForm()
     {
