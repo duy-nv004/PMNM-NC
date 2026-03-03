@@ -6,8 +6,11 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\testController;
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('home.index');
 });
 Route::get('/test', function () {
     // return view('home');
@@ -53,3 +56,5 @@ Route::get('/admin', function () {
 });
 
 Route::resource('categories', App\Http\Controllers\CategoryController::class);
+Route::resource('home', App\Http\Controllers\Client\HomeController::class);
+

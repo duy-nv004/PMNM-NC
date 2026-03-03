@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Middleware\CheckTimeAccess;
@@ -19,7 +20,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.product.add');
+        $categories = Category::all();
+        return view('admin.product.add', compact('categories'));
     }
 
     /**
@@ -28,9 +30,14 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $product = new Product;
+        $product->category_id = $request->input('category_id');
         $product->name = $request->input('name');
         $product->price = $request->input('price');
-        $product->quantity = $request->input('quantity');
+        $product->sale_price = $request->input('sale_price');
+        $product->stock = $request->input('stock');
+        $product->description = $request->input('description');
+        $product->image = $request->input('image');
+        $product->is_active = $request->input('is_active');
         $product->save();
         return redirect('/products');
     }
@@ -41,7 +48,8 @@ class ProductController extends Controller
     public function show(int $id)
     {
         $products = Product::find($id);
-        return view('admin.product.detail', compact('products'));
+        $categories = Category::all();
+        return view('admin.product.detail', compact('products', 'categories'));
     }
 
     /**
@@ -50,7 +58,8 @@ class ProductController extends Controller
     public function edit(string $id)
     {
         $product = Product::findOrFail($id);
-        return view('admin.product.edit', compact('product'));
+        $categories = Category::all();
+        return view('admin.product.edit', compact('product', 'categories'));
     }
 
     /**
@@ -59,9 +68,13 @@ class ProductController extends Controller
     public function update(Request $request, string $id)
     {
         $product = Product::find($id);
+        $product->category_id = $request->input('category_id');
         $product->name = $request->input('name');
         $product->price = $request->input('price');
-        $product->quantity = $request->input('quantity');
+        $product->sale_price = $request->input('sale_price');
+        $product->stock = $request->input('stock');
+        $product->description = $request->input('description');
+        $product->is_active = $request->input('is_active');
         $product->save();
         return redirect('/products');
     }
@@ -72,7 +85,12 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         $product = Product::findOrFail($id);
-        $product->delete();
+        if ($product->is_deleted == true) {
+            $product->is_deleted = false;
+        } else {
+            $product->is_deleted = true;
+        }
+        $product->save();
         return redirect('/products');
     }
 }

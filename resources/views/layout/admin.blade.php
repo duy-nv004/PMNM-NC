@@ -29,10 +29,10 @@
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <!-- Navbar -->
-        @include('partial.navbar')
+        @include('partial.admin.navbar')
         <!-- /.navbar -->
 
-        @include('partial.sidebar')
+        @include('partial.admin.sidebar')
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -73,7 +73,7 @@
         <!-- /.control-sidebar -->
 
         <!-- Main Footer -->
-        @include('partial.footer')
+        @include('partial.admin.footer')
     </div>
     <!-- ./wrapper -->
 

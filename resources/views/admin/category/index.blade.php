@@ -27,7 +27,7 @@
                             <td>{{ $category['is_active'] }}</td>
                             <td>{{ $category['is_deleted'] }}</td>
                             <td>
-                                <a href="{{ route('categories.show', $category->id) }}" class="btn btn-sm btn-primary">Detail</a>
+                                <!-- <a href="{{ route('categories.show', $category->id) }}" class="btn btn-sm btn-primary">Detail</a> -->
 
                                 <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-sm btn-info">Edit</a>
 
